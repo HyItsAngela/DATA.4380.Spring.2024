@@ -1,14 +1,14 @@
 ![](UTA-DataScience-Logo.png)
 
-# Project Title
+# Springleaf Marketing Response
 
 * This repository applies machine learning techniques and models to springlife marketing response to predict customer responses to the direct mail (DM) that springleaf sends out to connect with their current and potential clientale.
-From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competitions/springleaf-marketing-response/overview)]. 
+From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competitions/springleaf-marketing-response/overview)]. Kaggle provides a high-dimensional dataset that included anonymized customer information/features.
 
 ## Overview
 
 * Springleaf is a financial services company that provides customers with personal and auto loans. Direct mail is Springleaf's primary communication source to connect with their current customers and reach out to potential and target customers.
-* The task, as defined by the Kaggle challenge is to develop a model to "determine whether to send a direct mail peice to a customer". This repository approaches this problem as a binary classification task, using models x and were compared against each other. x was the best model for the task as it was able to determine whether a customer succesfully responded to a DM and hence should be futher contacted via DM scored at ~x% accuracy. At the time of this writing, the best performance on the Kaggle leaderboards of this metric is x%.
+* The task, as defined by the Kaggle challenge is to develop a model to "determine whether to send a direct mail peice to a customer". This repository approaches this problem as a binary classification task, using model CatBoost. The model was able to determine whether a customer succesfully responded to a DM and hence should be futher contacted via DM scored at ~72% accuracy. At the time of this writing, the best performance on the Kaggle leaderboards of this metric is 80%.
 
 ## Summary of Work Done
 
@@ -17,27 +17,33 @@ From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competiti
 * Data:
   * Type: Binary Classification
     * Input: CSV file: train.csv, test.csv; described customer response
-    * Output: sucess or failure based on whether or not the customer responded or not -> target col = 'x'
-  * Size: Original training and testing datasets together was x MB (training: x rows & x features (x MB); test: x rows & x features (x MB). After cleaning and proper preprocessing both datasets together was about x MB.
-  * Instances (Train, Test, Validation Split): training: x, testing: x.
-[work in progress]
+    * Output: success or failure based on whether or not the customer responded or not -> target col = 'target'
+  * Size: Original training and testing datasets together was 1,931 MB (training: 145,231 rows & 1934 features (966 MB); test: 145,232 rows & 1934 features (965 MB). After cleaning and preprocessing, both datasets was about 882 MB.
 
 #### Preprocessing / Clean up
 
-[work in progress]
+Before proceeding, my machine did not have the memory to compute the entire dataset so I proceeded with a subset/chunk of the data (24,205 rows & 1934 features).
+- Dropped features that had one unique & constant values
+- Dropped features with over 50% NA values
+- Operationalizing NA values
+- Confirming data types were appropriate
+- Dropped outliers
+- Transformed numerical data
+- Encoded categorical data
 
 #### Data Visualization
 
-[work in progress]
+Visualization of some categorical and numerical features that compare the targets.
+![image](https://github.com/user-attachments/assets/a75618c1-a765-40ff-81de-8cdcb6c4b31e)
+
+![image](https://github.com/user-attachments/assets/e41a6421-a645-480f-b419-a9cb631c580f)
 
 ### Problem Formulation
 
-* Train information about demographics, diagnosis and treatment options, insurance and more with machine learning to provide a better view about aspects that may contribute to health equity.
+* The features were anonymized so not much domain knowledge could be used, however there were some hints as to what columns were such as job titles, salary, states, and cities. The features were used in the model to help the company, Springleaf better connect with their current clientale and bring in potential customers.
   * Models
-    * RandomForest; chosen for it's ease and flexibility and hence used as a base model for comparison.
     * Catboost; chosen for it's built-in methods, predictive power and great results without the need for parameter tuning, and robustness.
-  * No in-depth fine-tuning or optimization to the models such as hypyerparameters, feature importance or cross validation were done. 
-[work in progress]
+  * Some in-depth fine-tuning or optimization to the model was performed such as hypyerparameters and feature importance. 
 
 ### Training
 
@@ -45,22 +51,17 @@ From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competiti
   * Training was done on a Surface Pro 9 using Python via jupyter notebook.
   * Training did not take long to process, with the longest training time to be approximately a minute.
   * Concluded training when results were satisfactory and plenty of evaluation metrics for comparison observed fairly decent results.
-[work in progress]
+  * Played around with the hyperparameters such as the learning rate, depth, and early round stopping while also optimizing the number of important features to use.
 
 ### Performance Comparison
 
 * Key performance metrics were imported from sklearn and consist of:
-  * log_loss().
   * classification_report().
   * accuracy_score().
-  * roc_auc_score().
-  * roc_curve().
-  * auc().
-[work in progress]
 
 ### Conclusions
 
-[work in progress] 
+
 
 ### Future Work
 
@@ -76,10 +77,10 @@ From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competiti
 
 ### Overview of files in repository
 
-* The repository includes x files in total.
-  * training.csv: Official and original training dataset that was provided from Kaggle
-  * test.csv: Official and original test dataset that was provided from Kaggle
-[work in progress]
+* The repository includes 3 files in total.
+  * data_understanding.ipynb:  provides my intitial walkthrough of trying to understand the data such as class distributions, features and missing values.
+  * preprocess_data.ipynb: explores the data further by dealing with the missing values and duplicates, visualizes the data, and transforms the dtypes appropriately.
+  * model_prediction.ipynb: trains the model, CatBoost on the preprocessed data.
 
 ### Software Setup
 * Required Packages:
@@ -110,7 +111,7 @@ From Kaggle's "Springleaf Marketing Response" [(https://www.kaggle.com/competiti
 
 #### Performance Evaluation
 
-* Evaluation metrics are imported such as the log loss, accuracy score, classification score. The ROC curve and AUC measurement were also imported and then placed into a function for comparison of multiple models.
+* Evaluation metrics are imported such as the accuracy score and classification score.
 * Run the notebooks.
 
 
