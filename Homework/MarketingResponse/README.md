@@ -116,4 +116,5 @@ Visualization of some categorical and numerical features that compare the target
 
 
 ## Citations
- [work in progress]
+- Official CatBoost website; used to learn about the CatBoost model and parameters it has to offer: https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier_eval-metrics
+- Official SciKit-Learn website; used to learn about RandomForest and other potential models: https://scikit-learn.org/stable/supervised_learning.html#supervised-learning
